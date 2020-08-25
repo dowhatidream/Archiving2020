@@ -1,0 +1,71 @@
+package 배열응용;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
+
+public class 투표2 {
+
+	public static void main(String[] args) {
+		// 100명을 뽑는 투표 시스템을 만들어서 배열에 넣고 누가 1등인지 출력?
+//		Random r = new Random();
+		Scanner sc = new Scanner(System.in);
+
+		String[] name = { "김댕댕", "이댕댕", "박댕댕", "최댕댕", "유댕댕" }; // 후보 이름 저장
+		int[] vote = new int[5];
+		int[] count = new int[5]; // 투표 수 배열(당연히 이름 배열의 인덱스와 순서 같음)
+
+		int first = count[0]; // 1등 득표 수
+		int second = count[0]; // 2등 득표 수
+		int index = 0; // 1등 득표 위치
+		int index2 = 0; // 2등 득표 위치
+
+		System.out.println("<후보 소개>");
+		for (int i = 0; i < name.length; i++) {
+			System.out.println(i + "번 " + name[i]);
+		}
+
+		System.out.println();
+		System.out.println("====투표 진행(vote)====");
+		for (int i = 0; i < name.length; i++) {
+			System.out.print(i+"번째 투표: ");
+			vote[i] = sc.nextInt();
+			
+
+			if (!(vote[i] >= 0 && vote[i] <= 4)) {
+				System.out.println("**범위 내에서 입력해주시죠!");
+				i--;
+			} else {
+				count[vote[i]]++; // ㅋㅋㅋㅋ
+			}
+		}
+
+		System.out.println();
+
+		System.out.println("====개표(count)====");
+		for (int i = 0; i < count.length; i++) {
+			System.out.println(name[i] + ": " + count[i]);
+		} // 득표 카운트
+
+		System.out.println();
+
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] > first) {
+				first = count[i]; // 최대 득표수
+				index = i; // 최대 득표수 위치
+			}
+		} // 1등 추출
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] < first && count[i] > second) {
+				second = count[i];
+				index2 = i;
+			}
+		} // 2등 추출
+
+		System.out.println("====결과====");
+		System.out.println("1등은 " + name[index] + ", 득표수는 " + first);
+		System.out.println("2등은 " + name[index2] + ", 득표수는 " + second);
+	}
+
+}
