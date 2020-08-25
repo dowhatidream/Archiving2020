@@ -1,0 +1,20 @@
+create table user(
+	uNo int NOT NULL AUTO_INCREMENT,
+	uID varchar(15) NOT NULL,
+	uPW varchar(20) NOT NULL,
+	uPhone varchar(15) NOT NULL,
+	uCDate datetime NOT NULL,
+	PRIMARY KEY(uNO)
+);
+
+create table post(
+	pNo int NOT NULL AUTO_INCREMENT,
+	pPic blob NOT NULL,
+	pCon text,
+	pCDate datetime NOT NULL,
+	pUDate datetime NOT NULL,
+	pLike int DEFAULT 0,
+	uID varchar(15) NOT NULL,
+	PRIMARY KEY(pNo),
+	FOREIGN KEY(uID) REFERENCES user(uID) 
+);
